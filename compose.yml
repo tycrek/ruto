@@ -1,0 +1,16 @@
+services:
+  ruto:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./redirects.json:/ruto/redirects.json
+    ports:
+      - '29035:29035'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 200M
+        reservations:
+          cpus: '0.25'
+          memory: 100M
