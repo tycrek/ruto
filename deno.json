@@ -1,0 +1,29 @@
+{
+	"name": "@tycrek/ruto",
+	"license": "ISC",
+	"version": "0.0.0",
+	"exports": "./ruto.ts",
+	"tasks": {
+		"run": "deno run -A --watch ./ruto.ts"
+	},
+	"imports": {
+		"@hono/hono": "jsr:@hono/hono@^4.6.19",
+		"@tycrek/log": "jsr:@tycrek/log@^1.0.0"
+	},
+	"fmt": {
+		"useTabs": true,
+		"indentWidth": 4,
+		"semiColons": true,
+		"singleQuote": true,
+		"lineWidth": 140,
+		"exclude": [
+			"README.md"
+		]
+	},
+	"exclude": [
+		".gitignore",
+		".vscode/",
+		"compose.yml"
+	],
+	"lock": false
+}
