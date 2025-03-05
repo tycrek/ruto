@@ -13,4 +13,4 @@ COPY redirects.json .
 COPY ruto.ts .
 RUN deno cache ./ruto.ts
 
-CMD deno task start
+CMD deno task run
