@@ -22,7 +22,7 @@ app.use(async (ctx, next) => {
 });
 
 app.get('*', async (ctx) => {
-	const url = ctx.req.url.split(/http(s?):\/\//g).pop()?.replace(/\/$/, "") ?? null;
+	const url = ctx.req.url.split(/http(s?):\/\//g).pop()?.replace(/\/$/, '') ?? null;
 	const routes = <Route[]> JSON.parse(await Deno.readTextFile('./redirects.json'));
 
 	for (const route of routes) {
