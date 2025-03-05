@@ -16,17 +16,19 @@ app.use(async (ctx, next) => {
 	const start = Date.now();
 	await next();
 	const time = Date.now() - start;
-	
+
 	if (ctx.res.status == 404) log.warn(`[404] [${time}ms] ${ctx.req.url}`);
 	else log.success(`[${ctx.res.status}] [${Date.now() - start}ms] ${ctx.req.url} -> ${ctx.get('where')}`);
 });
 
 app.get('*', async (ctx) => {
+	const url = ctx.req.url.split(/http(s?):\/\//g).pop()?.replace(/\/$/, "") ?? null;
 	const routes = <Route[]> JSON.parse(await Deno.readTextFile('./redirects.json'));
 
 	for (const route of routes) {
 		for (const source of route.sources) {
-			if (ctx.req.url.match(source)) {
+			// todo: figure out a better matcher
+			if (url?.endsWith(source)) {
 				ctx.set('where', route.destination);
 				return ctx.redirect(route.destination, <RedirectStatusCode> route.code ?? 302);
 			}
